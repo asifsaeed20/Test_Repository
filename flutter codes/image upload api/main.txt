@@ -1,0 +1,20 @@
+import 'package:flutter/material.dart';
+import 'package:apiintegration/upload_image.dart';
+void main() {
+  WidgetsFlutterBinding.ensureInitialized(); // Ensures proper initialization
+  runApp(const MyApp());
+}
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false, // Removes debug banner
+      theme: ThemeData.dark().copyWith(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green), // Theme color
+      ),
+      home: const UploadImageScreen(),
+    );
+  }
+}

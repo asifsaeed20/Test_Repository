@@ -1,0 +1,33 @@
+import 'package:flutter/material.dart';
+import 'package:uidsign/home_screen.dart';
+import 'package:uidsign/screen_two.dart';
+import 'package:uidsign/screen_three.dart';
+import 'package:uidsign/screen_four.dart';
+import 'package:uidsign/screen_five.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Navigation',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      initialRoute: HomeScreen.id, // First screen to show
+      routes: {
+        HomeScreen.id: (context) => HomeScreen(),
+        ScreenTwo.id: (context) => ScreenTwo(),
+        ScreenThree.id: (context) => ScreenThree(),
+        ScreenFour.id: (context) => ScreenFour(),
+        ScreenFive.id: (context) => ScreenFive(),
+      },
+    );
+  }
+}

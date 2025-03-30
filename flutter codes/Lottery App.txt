@@ -1,0 +1,182 @@
+import 'package:flutter/material.dart';
+import 'dart:math';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  Random random = Random();
+  int x = 0; // Winning number
+  Color startColor = Colors.blue.shade800;
+  Color endColor = Colors.blue.shade400;
+
+  void updateLottery() {
+    setState(() {
+      x = random.nextInt(5);
+
+      // Change background shades dynamically for animation
+      startColor = Colors.blue.shade800.withOpacity(random.nextDouble() * 0.5 + 0.5);
+      endColor = Colors.blue.shade400.withOpacity(random.nextDouble() * 0.5 + 0.5);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double boxSize = screenWidth * 0.75;
+
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text(
+            'Lottery App',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+          ),
+          centerTitle: true,
+          backgroundColor: Colors.blue.shade700,
+          elevation: 6,
+          shadowColor: Colors.blue.shade300,
+        ),
+        body: AnimatedContainer(
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.easeInOut,
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [startColor, endColor], // Dynamic gradient
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                'Lottery Winning Number is 4',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  shadows: [
+                    Shadow(color: Colors.black38, blurRadius: 5),
+                  ],
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 20),
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 500),
+                curve: Curves.easeInOut,
+                height: boxSize,
+                width: boxSize,
+                decoration: BoxDecoration(
+                  color: x == 4 ? Colors.green.shade400.withOpacity(0.8) : Colors.red.shade400.withOpacity(0.8),
+                  borderRadius: BorderRadius.circular(30),
+                  boxShadow: [
+                    BoxShadow(
+                      color: x == 4 ? Colors.green.shade900.withOpacity(0.5) : Colors.red.shade900.withOpacity(0.5),
+                      blurRadius: 15,
+                      spreadRadius: 3,
+                      offset: const Offset(0, 5),
+                    ),
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(18),
+                  child: x == 4
+                      ? Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(Icons.celebration, color: Colors.white, size: 50),
+                      const SizedBox(height: 15),
+                      const Text(
+                        '🎉 Congratulations! You Won! 🎉',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          letterSpacing: 1,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        'Your Number: $x',
+                        style: const TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  )
+                      : Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(Icons.sentiment_dissatisfied, color: Colors.white, size: 50),
+                      const SizedBox(height: 15),
+                      const Text(
+                        '😞 Better Luck Next Time!',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          letterSpacing: 1,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        'Your Number: $x\n(Try Again)',
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+        floatingActionButton: Ink(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.blue.shade700, Colors.blue.shade400],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            shape: BoxShape.circle,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.blue.shade900.withOpacity(0.5),
+                blurRadius: 10,
+                spreadRadius: 2,
+                offset: const Offset(0, 5),
+              ),
+            ],
+          ),
+          child: FloatingActionButton(
+            onPressed: updateLottery, // Calling update function
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            child: const Icon(Icons.refresh, color: Colors.white, size: 30),
+          ),
+        ),
+      ),
+    );
+  }
+}

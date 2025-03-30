@@ -1,0 +1,26 @@
+import 'package:flutter/material.dart';
+
+class ScreenFive extends StatefulWidget {
+  static const String id = 'screen_five';
+  const ScreenFive({super.key});
+
+  @override
+  State<ScreenFive> createState() => _ScreenFiveState();
+}
+
+class _ScreenFiveState extends State<ScreenFive> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Screen Five'),
+        backgroundColor: Colors.teal,
+      ),
+      body: Center(
+        child: Text('This is the Contact Page',style: TextStyle(
+          fontSize: 20,
+        ),),
+      ),
+    );
+  }
+}

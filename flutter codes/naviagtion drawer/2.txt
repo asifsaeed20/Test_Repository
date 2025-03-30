@@ -1,0 +1,32 @@
+import 'package:flutter/material.dart';
+import 'package:uidsign/screen_three.dart'; // Import ScreenThree
+
+class ScreenTwo extends StatefulWidget {
+  static const String id = 'screen_two';
+  const ScreenTwo({super.key});
+
+  @override
+  State<ScreenTwo> createState() => _ScreenTwoState();
+}
+
+class _ScreenTwoState extends State<ScreenTwo> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Screen Two'),
+        backgroundColor: Colors.teal,
+      ),
+      body: Center(
+        child: TextButton(
+          onPressed: () {
+            Navigator.pushNamed(context, ScreenThree.id);
+          },
+          child: Text('Go to Screen 3',style: TextStyle(
+            fontSize: 20,
+          ),),
+        ),
+      ),
+    );
+  }
+}

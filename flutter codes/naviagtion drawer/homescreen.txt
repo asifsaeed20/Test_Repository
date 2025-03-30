@@ -1,0 +1,86 @@
+import 'package:flutter/material.dart';
+import 'package:uidsign/screen_two.dart';
+import 'package:uidsign/screen_three.dart';
+import 'package:uidsign/screen_four.dart';
+import 'package:uidsign/screen_five.dart';
+
+class HomeScreen extends StatefulWidget {
+  static const String id = 'home_screen';
+  const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Center(child: Text('Navigation Drawer')),
+        backgroundColor: Colors.teal,
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            UserAccountsDrawerHeader(
+              decoration: BoxDecoration(color: Colors.green),
+              currentAccountPicture: CircleAvatar(
+                backgroundImage: NetworkImage(
+                    'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg'),
+              ),
+              accountName: Text('alex'),
+              accountEmail: Text('alex@example.com'),
+            ),
+            ListTile(
+              leading: Icon(Icons.pages),
+              title: Text('Page 1'),
+              onTap: () {
+                Navigator.pushNamed(context, ScreenTwo.id);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('Settings'),
+              onTap: () {
+                Navigator.pushNamed(context, ScreenThree.id);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.info),
+              title: Text('About'),
+              onTap: () {
+                Navigator.pushNamed(context, ScreenFour.id);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.contact_mail),
+              title: Text('Contact'),
+              onTap: () {
+                Navigator.pushNamed(context, ScreenFive.id);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.exit_to_app),
+              title: Text('Logout'),
+              onTap: () {
+                Navigator.pushNamed(context, HomeScreen.id);
+              },
+            ),
+          ],
+        ),
+      ),
+      body: Center(
+        child: TextButton(
+          onPressed: () {
+            Navigator.pushNamed(context, ScreenTwo.id);
+          },
+          child: Text('Go to Screen 1',style: TextStyle(
+            fontSize: 20,
+          ),),
+        ),
+      ),
+    );
+  }
+}

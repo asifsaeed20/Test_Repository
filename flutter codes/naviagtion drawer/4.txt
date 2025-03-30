@@ -1,0 +1,26 @@
+import 'packagefluttermaterial.dart';
+
+class ScreenFour extends StatefulWidget {
+  static const String id = 'screen_four';
+  const ScreenFour({super.key});
+
+  @override
+  StateScreenFour createState() = _ScreenFourState();
+}
+
+class _ScreenFourState extends StateScreenFour {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar AppBar(
+        title Text('Screen Four'),
+        backgroundColor Colors.teal,
+      ),
+      body Center(
+        child Text('This is the About Page',style TextStyle(
+          fontSize 20,
+        ),),
+      ),
+    );
+  }
+}
